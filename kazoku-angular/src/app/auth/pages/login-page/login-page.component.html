@@ -1,7 +1,7 @@
 <div class="container">
   <div class="login-form">
-    <form action="#" (submit)="onSubmit()" [formGroup]="loginForm">
-      <label for="username">
+    <form action="#" class="form" (submit)="onSubmit()" [formGroup]="loginForm">
+      <label for="username" class="form-field">
         Username
         <input type="text" name="username" id="username" formControlName="username" required>
         <ng-container *ngIf="loginForm.get('username')?.touched">
@@ -10,7 +10,7 @@
           </p>
         </ng-container>
       </label>
-      <label for="password">
+      <label for="password" class="form-field">
         Password
         <input type="password" name="password" id="password" formControlName="password" required>
         <ng-container *ngIf="loginForm.get('password')?.touched">
@@ -19,7 +19,7 @@
           </p>
         </ng-container>
       </label>
-      <label for="remember-me">
+      <label for="remember-me" class="form-inline-field">
         <input type="checkbox" name="remember-me" id="remember-me" formControlName="remember-me">
         Remember Me
       </label>

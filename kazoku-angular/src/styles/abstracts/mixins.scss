@@ -1,0 +1,14 @@
+$breakpoint-medium: 48em;
+$breakpoint-large: 64em;
+
+@mixin screen-medium() {
+  @media (min-width: $breakpoint-medium) {
+    @content;
+  }
+}
+
+@mixin screen-large() {
+@media (min-width: $breakpoint-large) {
+  @content;
+}
+}
