@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="login-form">
+    <form action="#" (submit)="onSubmit()" [formGroup]="loginForm">
+      <label for="username">
+        Username
+        <input type="text" name="username" id="username" formControlName="username" required>
+        <ng-container *ngIf="loginForm.get('username')?.touched">
+          <p *ngIf="loginForm.get('username')?.errors?.['required']">
+            The email field is required
+          </p>
+        </ng-container>
+      </label>
+      <label for="password">
+        Password
+        <input type="password" name="password" id="password" formControlName="password" required>
+        <ng-container *ngIf="loginForm.get('password')?.touched">
+          <p *ngIf="loginForm.get('password')?.errors?.['password']">
+            The password field is required
+          </p>
+        </ng-container>
+      </label>
+      <label for="remember-me">
+        <input type="checkbox" name="remember-me" id="remember-me" formControlName="remember-me">
+        Remember Me
+      </label>
+      <button type="submit">Log in</button>
+    </form>
+  </div>
+</div>
