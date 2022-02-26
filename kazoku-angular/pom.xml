@@ -5,25 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <artifactId>kazoku-project</artifactId>
+        <groupId>org.astlaure</groupId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.astlaure</groupId>
-    <artifactId>kazoku-project</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <artifactId>kazoku-angular</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
-
-    <modules>
-        <module>kazoku-angular</module>
-        <module>kazoku-api</module>
-    </modules>
 
 </project>
