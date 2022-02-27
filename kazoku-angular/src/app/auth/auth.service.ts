@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, of, tap } from 'rxjs';
 import { ProfileDto } from './models/profile.dto';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { LoginDto } from './models/login.dto';
@@ -16,14 +16,8 @@ export class AuthService {
   getProfile() {
     return this.httpClient.get<ProfileDto>('api/auth/profile')
       .pipe(
-        map((value) => {
-          this.profile.next(value);
-          return value;
-        }),
-        catchError(() => {
-          this.profile.next(null);
-          return of(null);
-        }),
+        tap((value) => this.profile.next(value)),
+        catchError(() => of(null)),
         tap(() => this.profileLoaded = true),
       );
   }
@@ -32,10 +26,13 @@ export class AuthService {
     const httpParams = new HttpParams({
       fromObject: { ...login },
     });
-    return this.httpClient.post('api/auth/login', httpParams);
+    return this.httpClient.post<ProfileDto>('api/auth/login', httpParams);
   }
 
   postLogout() {
-    return this.httpClient.post('api/auth/logout', undefined);
+    return this.httpClient.post('api/auth/logout', undefined)
+      .pipe(
+        tap((value) => this.profile.next(null)),
+      );
   }
 }

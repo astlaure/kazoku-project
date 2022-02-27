@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,10 +15,21 @@ export class LoginComponent implements OnInit {
     'remember-me': [false, []],
   });
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.authService.postLogin(this.loginForm.value)
+      .subscribe({
+        next: (value) => {
+          this.authService.profile.next(value);
+          this.router.navigate(['/dashboard']);
+        },
+        error: (err) => {},
+      });
+  }
 }
