@@ -1,10 +1,11 @@
-$max-width: 75em;
-
+// Colors
 $color-primary: #333333;
 
+// Fonts Family
 $font-primary: 'Poppins', sans-serif;
 $font-secondary: 'Montserrat', sans-serif;
 
+// Text Sizes
 $text-xs: 0.563rem;
 $text-sm: 0.75rem;
 $text-md: 1rem;
@@ -13,3 +14,30 @@ $text-xl: 1.777rem;
 $text-2xl: 2.369rem;
 $text-3xl: 3.157rem;
 $text-4xl: 4.209rem;
+
+// Sizes
+$max-width: 75em;
+
+$size-1: 0.25rem;
+$size-2: 0.5rem;
+$size-3: 0.75rem;
+$size-4: 1rem;
+$size-5: 1.5rem;
+$size-6: 2rem;
+$size-7: 2.5rem;
+$size-8: 3rem;
+$size-9: 4rem;
+$size-10: 6rem;
+
+$size-map: (
+  "1": 0.25rem,
+  "2": 0.5rem,
+  "3": 0.75rem,
+  "4": 1rem,
+  "5": 1.5rem,
+  "6": 2rem,
+  "7": 2.5rem,
+  "8": 3rem,
+  "9": 4rem,
+  "10": 6rem,
+);

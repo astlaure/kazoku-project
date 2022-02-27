@@ -1,0 +1,13 @@
+.button {
+  padding: 0.25rem 1.5rem;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &.primary {
+    transition: background-color 200ms ease-in-out;
+
+    &:hover {
+      background-color: #d6d6d6;
+    }
+  }
+}

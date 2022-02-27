@@ -1,0 +1,55 @@
+@use "src/styles/abstracts/variables" as *;
+
+.navbar {
+  height: 6rem;
+
+  .container {
+    height: 100%;
+    display: flex;
+  }
+
+  .navbar-brand {
+    height: 100%;
+    padding: 0.5rem 0;
+
+    a {
+      display: block;
+      height: 100%;
+    }
+
+    img {
+      height: 100%;
+    }
+  }
+
+  .navbar-menus {
+    height: 100%;
+    margin-left: auto;
+
+    .navbar-menu {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      height: 100%;
+    }
+
+    .navbar-menu-item {
+      margin: 0 0.5rem;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      a {
+        font-weight: 500;
+        font-size: $text-lg;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+    }
+  }
+}
