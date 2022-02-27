@@ -4,6 +4,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
@@ -12,6 +13,7 @@ import { RouterModule } from '@angular/router';
     DashboardComponent,
     HomeComponent,
     NavbarComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -19,6 +21,7 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     NavbarComponent,
+    FooterComponent,
   ]
 })
 export class CoreModule { }

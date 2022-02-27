@@ -50,6 +50,15 @@
         text-transform: uppercase;
         text-decoration: none;
       }
+
+      input[type=submit] {
+        padding: 0;
+        text-transform: uppercase;
+        font-size: $text-lg;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+      }
     }
   }
 }

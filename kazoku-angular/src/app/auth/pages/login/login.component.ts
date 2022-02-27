@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
     password: ['', [Validators.required]],
     'remember-me': [false, []],
   });
+  globalErrors = false;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
@@ -23,13 +24,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.globalErrors = false;
     this.authService.postLogin(this.loginForm.value)
       .subscribe({
         next: (value) => {
           this.authService.profile.next(value);
           this.router.navigate(['/dashboard']);
         },
-        error: (err) => {},
+        error: (err) => this.globalErrors = true,
       });
   }
 }
