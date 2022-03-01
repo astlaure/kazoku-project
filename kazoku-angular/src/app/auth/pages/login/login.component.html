@@ -2,7 +2,7 @@
   <div class="flex-grid justify-center">
     <div class="column medium-6">
       <app-card>
-        <p class="global-error" *ngIf="globalErrors">Wrong credentials.</p>
+        <app-message type="error" *ngIf="globalErrors">Wrong credentials.</app-message>
         <form action="#" class="form" (submit)="onSubmit()" [formGroup]="loginForm">
           <label for="username" class="form-field">
             Username
