@@ -1,25 +1,21 @@
 package org.astlaure.kazoku.emails;
 
-import freemarker.template.Configuration;
-import freemarker.template.TemplateException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.util.Map;
 
 @Service
 public class EmailService {
     private final JavaMailSender mailSender;
-    private final Configuration configuration;
+    private final TemplateEngine templateEngine;
 
-    public EmailService(JavaMailSender mailSender, Configuration configuration) {
+    public EmailService(JavaMailSender mailSender, TemplateEngine templateEngine) {
         this.mailSender = mailSender;
-        this.configuration = configuration;
+        this.templateEngine = templateEngine;
     }
 
     public void sendEmail(Email email) {
@@ -31,19 +27,12 @@ public class EmailService {
             mimeMessageHelper.setSubject(email.getSubject());
             mimeMessageHelper.setFrom(email.getFrom());
             mimeMessageHelper.setTo(email.getTo());
-            String emailContent = getContentFromTemplate(email.getTemplate().value, email.getModel());
-            mimeMessageHelper.setText(emailContent, true);
+            String process = templateEngine.process(email.getTemplate().value, email.getContext());
+            mimeMessageHelper.setText(process, true);
 
             mailSender.send(mimeMessageHelper.getMimeMessage());
-        } catch (MessagingException | TemplateException | IOException e) {
+        } catch (MessagingException e) {
             e.printStackTrace();
         }
-    }
-
-    private String getContentFromTemplate(String template, Map< String, Object > model) throws IOException, TemplateException {
-        StringWriter stringWriter = new StringWriter();
-
-        configuration.getTemplate(template).process(model, stringWriter);
-        return stringWriter.getBuffer().toString();
     }
 }

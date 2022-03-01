@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 @Data
@@ -12,9 +11,8 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 public class ResetPasswordDto {
     @NotEmpty
-    @Email
-    private String email;
+    private String token;
 
     @NotEmpty
-    private String token;
+    private String password;
 }

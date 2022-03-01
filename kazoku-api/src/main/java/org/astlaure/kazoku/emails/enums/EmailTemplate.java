@@ -1,7 +1,7 @@
 package org.astlaure.kazoku.emails.enums;
 
 public enum EmailTemplate {
-    RESET_PASSWORD("reset-password.ftlh");
+    RESET_PASSWORD("reset-password");
 
     public final String value;
 
