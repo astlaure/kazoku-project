@@ -4,14 +4,15 @@ import org.astlaure.kazoku.emails.Email;
 import org.astlaure.kazoku.emails.EmailService;
 import org.astlaure.kazoku.emails.enums.EmailTemplate;
 import org.astlaure.kazoku.passwords.models.ForgotPasswordDto;
+import org.astlaure.kazoku.passwords.models.ResetPasswordDto;
 import org.astlaure.kazoku.users.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
 import java.util.UUID;
 
 @Service
@@ -23,7 +24,8 @@ public class PasswordService {
     @Value("${kazoku.mail.from}")
     private String mailFrom;
 
-    public PasswordService(PasswordResetRepository passwordResetRepository, UserService userService, EmailService emailService) {
+    public PasswordService(PasswordResetRepository passwordResetRepository,UserService userService,
+                           EmailService emailService) {
         this.passwordResetRepository = passwordResetRepository;
         this.userService = userService;
         this.emailService = emailService;
@@ -32,16 +34,24 @@ public class PasswordService {
     public void forgotPassword(ForgotPasswordDto forgotPassword) {
         var passwordResetToken = createForgotPasswordToken(forgotPassword);
 
-        var model = new HashMap<String, Object>();
-        model.put("resetLink", "http://localhost:4200/reset-password?token=" + passwordResetToken.getToken());
+        var context = new Context();
+        context.setVariable("resetLink", "http://localhost:4200/reset-password?token=" + passwordResetToken.getToken());
 
         emailService.sendEmail(Email.builder()
                         .from(mailFrom)
                         .to(forgotPassword.getEmail())
                         .subject("Reset Password")
-                        .model(model)
+                        .context(context)
                         .template(EmailTemplate.RESET_PASSWORD)
                 .build());
+    }
+
+    public void resetPassword(ResetPasswordDto resetPassword) throws Exception {
+        var passwordResetToken = passwordResetRepository.findByTokenAndExpirationAfter(resetPassword.getToken(), LocalDateTime.now())
+                .orElseThrow(() -> new Exception("Password Reset Token is invalid."));
+
+        userService.updateUserPassword(passwordResetToken.getUser(), resetPassword.getPassword());
+        passwordResetRepository.delete(passwordResetToken);
     }
 
     private PasswordResetToken createForgotPasswordToken(ForgotPasswordDto forgotPassword) {

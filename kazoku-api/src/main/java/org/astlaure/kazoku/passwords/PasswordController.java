@@ -26,7 +26,8 @@ public class PasswordController {
     }
 
     @PostMapping("/reset")
-    public ResponseEntity<?> postResetPassword(@Valid @RequestBody ResetPasswordDto resetPassword) {
+    public ResponseEntity<?> postResetPassword(@Valid @RequestBody ResetPasswordDto resetPassword) throws Exception {
+        passwordService.resetPassword(resetPassword);
         return ResponseEntity.status(200).build();
     }
 }
