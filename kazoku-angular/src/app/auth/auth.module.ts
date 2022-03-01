@@ -7,11 +7,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './pages/login/login.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { PasswordService } from './services/password.service';
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -22,6 +27,7 @@ import { LoginComponent } from './pages/login/login.component';
   ],
   providers: [
     AuthService,
+    PasswordService,
   ]
 })
 export class AuthModule { }
