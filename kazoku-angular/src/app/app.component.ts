@@ -8,11 +8,12 @@ import { AuthService } from './auth/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'kazoku-angular';
+  // isLoaded = false;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.authService.getProfile()
-      .subscribe();
+    // this.authService.getProfile()
+    //   .subscribe(() => this.isLoaded = true);
   }
 }
